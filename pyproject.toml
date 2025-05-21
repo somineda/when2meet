@@ -12,6 +12,7 @@ uvicorn = "^0.34.2"
 orjson = "3.10.12"
 sqids = "0.5.1"
 edgedb = "2.2.0"
+httpx = "0.28.1"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -1,8 +1,8 @@
 import string
-from typing import Final, ClassVar #재할당을 막아줌
+from typing import Final  # 재할당을 막아줌
 
-#결과 값에 들어갈 수 있는 문자, 숫자를 미리 지정
-#이 값들의 개수가 64개면 base64 가 되고, 62개면 base62
+# 결과 값에 들어갈 수 있는 문자, 숫자를 미리 지정
+# 이 값들의 개수가 64개면 base64 가 되고, 62개면 base62
 
 
 class Base62:

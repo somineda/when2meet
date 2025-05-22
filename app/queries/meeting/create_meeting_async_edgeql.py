@@ -3,11 +3,12 @@
 
 
 from __future__ import annotations
+
 import dataclasses
-import edgedb
 import uuid
 from typing import cast
 
+import edgedb
 
 
 @dataclasses.dataclass
@@ -24,7 +25,7 @@ async def create_meeting(
     return cast(
         CreateMeetingResult,
         await executor.query_single(
-        """\
+            """\
         with
             url_code := <str>$url_code #인자로 받음
         select (
@@ -33,6 +34,6 @@ async def create_meeting(
             }
         ) {url_code}\
         """,
-        url_code=url_code,
-    ),
-)
+            url_code=url_code,
+        ),
+    )

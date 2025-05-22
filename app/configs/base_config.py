@@ -15,5 +15,5 @@ class Config(BaseSettings):
     MYSQL_HOST: str = "localhost"
     MYSQL_PORT: int = 3306
     MYSQL_USER: str = "root"
-    MYSQL_PASSWORD: str = "1234"
+    MYSQL_PASSWORD: str = ""
     MYSQL_DB: str = "when2meet_vod"

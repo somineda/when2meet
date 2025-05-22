@@ -93,8 +93,12 @@ jobs:
         if: steps.cache-venv.outputs.cache-hit != 'true'
         run: poetry install --no-root
 
+      - name: Setup edgedb
+        uses: edgedb/setup-edgedb@v1
+
       - name: Run tests
         run: |
           poetry run coverage run -m pytest .
           poetry run coverage report -m
-ㄴ
+...
+

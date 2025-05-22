@@ -26,7 +26,7 @@ async def api_create_meeting_mysql() -> CreateMeetingResponse:
     return CreateMeetingResponse(url_code=(await service_create_meeting_mysql()).url_code)
 
 @edgedb_router.get(
-    "/{meeting_url_code}",
+    "/{meeting_url_code}",  # path variable
     description="meeting 을 조회합니다.",
 )
 async def api_get_meeting_edgedb(meeting_url_code: str) -> GetMeetingResponse:
@@ -35,12 +35,18 @@ async def api_get_meeting_edgedb(meeting_url_code: str) -> GetMeetingResponse:
         raise HTTPException(
             status_code=HTTP_404_NOT_FOUND, detail=f"meeting with url_code: {meeting_url_code} not found"
         )
-    return GetMeetingResponse(url_code=meeting.url_code)
-async def api_get_meeting_edgedb(meeting_url_code: str) -> GetMeetingResponse:
-    return GetMeetingResponse(url_code="abc")
+    from datetime import datetime
+    return GetMeetingResponse(
+        url_code=meeting.url_code,
+        end_date=datetime.now().date(),
+        start_date=datetime.now().date(),
+        title="test",
+        location="test",
+    )
+
 
 @mysql_router.get(
-    "/{meeting_url_code}",
+    "/{meeting_url_code}",  # path variable
     description="meeting 을 조회합니다.",
 )
 async def api_get_meeting_mysql(meeting_url_code: str) -> GetMeetingResponse:
@@ -49,6 +55,37 @@ async def api_get_meeting_mysql(meeting_url_code: str) -> GetMeetingResponse:
         raise HTTPException(
             status_code=HTTP_404_NOT_FOUND, detail=f"meeting with url_code: {meeting_url_code} not found"
         )
-    return GetMeetingResponse(url_code=meeting.url_code)
+    import datetime
+    return GetMeetingResponse(
+        url_code=meeting.url_code,
+        start_date=datetime.now().date(),
+        end_date=datetime.now().date(),
+        title="test",
+        location="test",
+    )
 
 
+@edgedb_router.patch("/{meeting_url_code}/date_range", description="meeting 의 날짜 range 를 설정합니다.")
+async def api_update_meeting_date_range_edgedb(
+    meeting_url_code: str, update_meeting_date_range_request: UpdateMeetingDateRangeRequest
+) -> GetMeetingResponse:
+    return GetMeetingResponse(
+        url_code="abc",
+        start_date=datetime.now().date(),
+        end_date=datetime.now().date(),
+        title="test",
+        location="test",
+    )
+
+
+@mysql_router.patch("/{meeting_url_code}/date_range", description="meeting 의 날짜 range 를 설정합니다.")
+async def api_update_meeting_date_range_mysql(
+    meeting_url_code: str, update_meeting_date_range_request: UpdateMeetingDateRangeRequest
+) -> GetMeetingResponse:
+    return GetMeetingResponse(
+        url_code="abc",
+        start_date=datetime.now().date(),
+        end_date=datetime.now().date(),
+        title="test",
+        location="test",
+    )
